@@ -5,27 +5,44 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "build": "tsc -b && vite build",
+    "lint": "eslint . --max-warnings 0",
+    "preview": "vite preview",
+    "test": "vitest run"
   },
   "dependencies": {
-    "@emotion/react": "^11.11.4",
-    "@emotion/styled": "^11.11.5",
-    "@mui/icons-material": "^5.15.15",
-    "@mui/material": "^5.15.15",
-    "@reduxjs/toolkit": "^2.2.3",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-redux": "^9.1.0"
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
+    "@hookform/resolvers": "^5.2.2",
+    "@mui/icons-material": "^7.3.2",
+    "@mui/material": "^7.3.2",
+    "@reduxjs/toolkit": "^2.9.0",
+    "async-mutex": "^0.5.0",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "react-hook-form": "^7.63.0",
+    "react-redux": "^9.2.0",
+    "react-router-dom": "^7.9.1",
+    "zod": "^4.1.11"
   },
   "devDependencies": {
-    "@types/react": "^18.2.66",
-    "@types/react-dom": "^18.2.22",
-    "@vitejs/plugin-react": "^4.2.1",
-    "tailwindcss": "^4.0.0",
-    "@tailwindcss/vite": "^4.0.0",
-    "typescript": "^5.2.2",
-    "vite": "^5.2.0"
+    "@eslint/js": "^9.36.0",
+    "@tailwindcss/vite": "^4.1.13",
+    "@testing-library/jest-dom": "^6.8.0",
+    "@testing-library/react": "^16.3.0",
+    "@testing-library/user-event": "^14.6.1",
+    "@types/react": "^19.1.16",
+    "@types/react-dom": "^19.1.9",
+    "@vitejs/plugin-react": "^5.0.3",
+    "eslint": "^9.36.0",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-refresh": "^0.4.22",
+    "globals": "^16.4.0",
+    "jsdom": "^26.1.0",
+    "tailwindcss": "^4.1.13",
+    "typescript": "^5.9.2",
+    "typescript-eslint": "^8.44.1",
+    "vite": "^7.1.7",
+    "vitest": "^5.0.1"
   }
 }

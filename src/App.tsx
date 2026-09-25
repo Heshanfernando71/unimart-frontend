@@ -1,38 +1,32 @@
-import React from 'react'
-import { ListingCard } from './features/listings/components/ListingCard'
-import { ListingForm } from './features/listings/components/ListingForm'
-import { useGetListingsQuery } from './features/listings/listingsApi'
-import { Typography, CircularProgress, Alert } from '@mui/material'
+import { CircularProgress, Typography } from '@mui/material'
+import { useEffect, useRef, useState } from 'react'
+import { useRefreshSessionMutation } from './features/auth/authApi'
+import { AppRouter } from './routes/AppRouter'
 
 function App() {
-  const { data: listings, isLoading, isError } = useGetListingsQuery()
+  const [refreshSession] = useRefreshSessionMutation()
+  const [bootstrapped, setBootstrapped] = useState(false)
+  const started = useRef(false)
 
-  return (
-    <div className="min-h-screen bg-gray-100 p-8">
-      <h1 className="text-4xl font-bold mb-8 text-blue-600">UniMart Listings (Standalone Mock Mode)</h1>
-      <div className="mb-8">
-        <ListingForm />
+  useEffect(() => {
+    if (started.current) return
+    started.current = true
+    void refreshSession()
+      .unwrap()
+      .catch(() => undefined)
+      .finally(() => setBootstrapped(true))
+  }, [refreshSession])
+
+  if (!bootstrapped) {
+    return (
+      <div className="flex min-h-screen flex-col items-center justify-center gap-3" role="status">
+        <CircularProgress />
+        <Typography color="text.secondary">Starting UniMart…</Typography>
       </div>
-      
-      {isLoading && <CircularProgress className="mt-4" />}
-      {isError && <Alert severity="error">Failed to fetch mock listings!</Alert>}
-      
-      {listings && (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
-          {listings.map((listing) => (
-            <ListingCard 
-              key={listing.id}
-              id={listing.id} 
-              title={listing.title} 
-              price={listing.price} 
-              description={listing.description} 
-              status={listing.status} 
-            />
-          ))}
-        </div>
-      )}
-    </div>
-  )
+    )
+  }
+
+  return <AppRouter />
 }
 
 export default App
